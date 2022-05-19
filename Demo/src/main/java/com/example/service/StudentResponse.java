@@ -3,9 +3,13 @@ package com.example.service;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+//@NoArgsConstructor
 public class StudentResponse {
 
 	@JsonIgnore
@@ -14,13 +18,5 @@ public class StudentResponse {
 	@JsonProperty("first_name")
 	private String firstName;
 	private String lastName;
-
-
-	public StudentResponse(long id, String firstName, String lastName) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
 	
 }
