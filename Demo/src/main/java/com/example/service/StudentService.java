@@ -35,8 +35,18 @@ public class StudentService {
 			student.setFirstName(updateStudentRequest.getFirstName());
 		}
 //		student.setFirstName(updateStudentRequest.getFirstName());
+		student.setLastName(updateStudentRequest.getLastName());
+		student.setEmail(updateStudentRequest.getEmail());
 		student = studentRepository.save(student);
 		
 		return student;
 	}
+	
+	public String deleteStudent(long id) {
+		studentRepository.deleteById(id);
+		return "Student has been deleted successfully";
+	}
+	
+	
+	
 }
