@@ -8,7 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.entity.Address;
 import com.example.entity.Student;
+import com.example.repository.AddressRepository;
 import com.example.repository.StudentRepository;
 import com.example.request.CreateStudentRequest;
 import com.example.request.InQueryRequest;
@@ -20,13 +22,23 @@ public class StudentService {
 	@Autowired
 	StudentRepository studentRepository;
 	
+	@Autowired
+	AddressRepository addressRepository;
+	
 	public List<Student> getAllStudents() {
 		return studentRepository.findAll();
 	}
 	
 	public Student createStudent(CreateStudentRequest createStudentRequest) {
 		Student student = new Student(createStudentRequest);
+		Address address = new Address();
 		
+		address.setStreet(createStudentRequest.getStreet());
+		address.setCity(createStudentRequest.getCity());
+		
+		address = addressRepository.save(address);
+		
+		student.setAddress(address);
 		student = studentRepository.save(student);
 		return student;
 	}
@@ -96,7 +108,9 @@ public class StudentService {
 	public Integer deleteStudent(String firstName) {
 		return studentRepository.deleteByFirstName(firstName);
 	}
-	
+	public List<Student> getByCity (String city) {
+		return studentRepository.findByAddressCity(city);
+	}
 	
 	
 	

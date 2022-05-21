@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.entity.Address;
 import com.example.entity.Student;
 
 @Repository
@@ -34,4 +35,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 	@Transactional
 	@Query("Delete From Student where firstName = :firstName")
 	Integer deleteByFirstName (String firstName);
+	
+	
+	List<Student> findByAddressCity(String city);
+	
 }
