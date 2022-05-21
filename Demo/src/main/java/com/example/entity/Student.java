@@ -39,7 +39,8 @@ public class Student {
 	@Transient
 	private String fullName;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+//	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumn(name="address_id")
 	private Address address;
 	

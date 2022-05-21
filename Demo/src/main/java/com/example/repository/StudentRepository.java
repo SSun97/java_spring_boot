@@ -42,4 +42,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 	@Query("From Student where address.city = :city")
 	List<Student> getByAddressCity(String city);
 	
+	@Query("From Address where street = :street")
+	List<Student> getStudentByAddressStreet(String street);
+	
 }

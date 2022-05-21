@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.entity.Address;
 import com.example.entity.Student;
 import com.example.request.CreateStudentRequest;
 import com.example.request.InQueryRequest;
 import com.example.request.UpdateStudentRequest;
+import com.example.service.AddressResponse;
 import com.example.service.StudentResponse;
 import com.example.service.StudentService;
 
@@ -184,6 +186,16 @@ public class StudentController {
 		});
 		
 		return studentResponseList;
+	}
+	@GetMapping("/getAllAddresses")
+	public List<AddressResponse> getAllAddresses() {
+		List<Address> addressList = studentService.getAllAddresses();
+		List<AddressResponse> addressResponseList = new ArrayList<AddressResponse>();
+		
+		addressList.stream().forEach(address -> {
+			addressResponseList.add(new AddressResponse(address));
+		});
+		return addressResponseList;
 	}
 	
 	

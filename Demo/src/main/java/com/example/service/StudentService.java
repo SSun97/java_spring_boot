@@ -111,6 +111,9 @@ public class StudentService {
 	public List<Student> getByCity (String city) {
 		return studentRepository.getByAddressCity(city);
 	}
+	public List<Address> getAllAddresses() {
+		return addressRepository.findAll();
+	}
 	
 	
 	
