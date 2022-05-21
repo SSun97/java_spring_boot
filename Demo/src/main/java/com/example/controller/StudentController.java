@@ -143,7 +143,7 @@ public class StudentController {
 	@GetMapping("/startsWith/{firstName}")
 	public List<StudentResponse> startsWith(@PathVariable String firstName) {
 		
-		List<Student> studentList = studentService.like(firstName);
+		List<Student> studentList = studentService.startsWith(firstName);
 		
 		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
 		
@@ -151,6 +151,22 @@ public class StudentController {
 			studentResponseList.add(new StudentResponse(student));
 		});
 		return studentResponseList;
+	}
+	@GetMapping("/endsWith/{firstName}")
+	public List<StudentResponse> endsWith(@PathVariable String firstName) {
+		
+		List<Student> studentList = studentService.endsWith(firstName);
+		
+		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+		
+		studentList.stream().forEach(student -> {
+			studentResponseList.add(new StudentResponse(student));
+		});
+		return studentResponseList;
+	}
+	@PutMapping("/updateFirstName/{id}/{firstName}")
+	public String updateStudentWithJpql(@PathVariable Long id, @PathVariable String firstName) {
+		return studentService.updateStudentWithJpql(id, firstName) + " Student(s) updated";
 	}
 
 	
