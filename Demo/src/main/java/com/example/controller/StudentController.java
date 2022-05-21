@@ -116,6 +116,18 @@ public class StudentController {
 		});
 		return studentResponseList;
 	}
+	@GetMapping("/getAllWithSorting")
+	public List<StudentResponse> getAllStudentsWithSorting() {
+		
+		List<Student> studentList = studentService.getAllStudentWithSorting();
+		
+		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
+		
+		studentList.stream().forEach(student -> {
+			studentResponseList.add(new StudentResponse(student));
+		});
+		return studentResponseList;
+	}
 	
 	
 	
