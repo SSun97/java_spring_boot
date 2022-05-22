@@ -1,5 +1,7 @@
 package com.example.request;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,4 +17,5 @@ public class CreateStudentRequest {
 	private String email;
 	private String street;
 	private String city;
+	private List<CreateSubjectRequest> subjectLearning;
 }

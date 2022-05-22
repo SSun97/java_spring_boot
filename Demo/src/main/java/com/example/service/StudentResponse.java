@@ -1,16 +1,16 @@
 package com.example.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.entity.Student;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.example.entity.Subject;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-//@NoArgsConstructor
 public class StudentResponse {
 
 	private long id;
@@ -22,6 +22,7 @@ public class StudentResponse {
 	private String fullName;
 	private String street;
 	private String city;
+	private List<SubjectResponse> learningSubjects;
 	
 	public StudentResponse (Student student) {
 		this.id = student.getId();
@@ -31,6 +32,12 @@ public class StudentResponse {
 		this.fullName = student.getFirstName() + " " + student.getLastName();
 		this.street = student.getAddress().getStreet();
 		this.city = student.getAddress().getCity();
+		if (student.getLearningSubjects() != null) {
+			learningSubjects = new ArrayList<SubjectResponse>();
+			for (Subject subject: student.getLearningSubjects()) {
+				learningSubjects.add(new SubjectResponse(subject));
+			}
+		}
 	}
 	
 }
