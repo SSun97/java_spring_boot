@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,11 +32,20 @@ import com.example.service.StudentService;
 @RequestMapping("/api/student/")
 public class StudentController {
 	
+	Logger logger = LoggerFactory.getLogger(StudentController.class);
+	
 	@Autowired
 	StudentService studentService;
 	
 	@GetMapping("/getAll")
 	public List<StudentResponse> getAllStudents() {
+		
+		logger.error("Inside Error");
+		logger.warn("Inside Warning");
+		logger.info("Inside Info");
+		logger.debug("Inside Debug");
+		logger.trace("Inside Trace");
+		
 		List<Student> studentList = studentService.getAllStudents();
 		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
 		
@@ -97,6 +108,7 @@ public class StudentController {
 	@GetMapping("/getByFirstNameIn")
 	public List<StudentResponse> getByFirstNameIn(@RequestBody InQueryRequest inQueryRequest) {
 		
+		logger.info("inQueryRequest= " + inQueryRequest);
 		List<Student> studentList = studentService.getByFirstNameIn(inQueryRequest);
 		
 		List<StudentResponse> studentResponseList = new ArrayList<StudentResponse>();
@@ -104,6 +116,8 @@ public class StudentController {
 		studentList.stream().forEach(student -> {
 			studentResponseList.add(new StudentResponse(student));
 		});
+		
+		logger.info("studentResponseList= " + studentResponseList);
 		return studentResponseList;
 	}
 	@GetMapping("/getAllWithPagination")
